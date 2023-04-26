@@ -1,6 +1,7 @@
 import React from 'react';
 import Rating from 'react-rating';
 import { AiFillStar,AiOutlineStar,AiFillEye } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 const News = ({news}) => {
     const date = new Date(news?.author?.published_date);
@@ -19,7 +20,7 @@ const News = ({news}) => {
             <div className='m-5'>
                 <p className='text-xl font-bold'>{news.title}</p>
                 <img className='w-full my-7' src={news.image_url} alt="" />
-                <p className='text-sm text-gray-500'>{news.details.slice(0,250)}...<span className='text-md text-orange-500 font-bold'>See More</span></p>
+                <p className='text-sm text-gray-500'>{news.details.slice(0,250)}...<Link to={`/news/${news._id}`} className='text-md text-orange-500 font-bold'>See More</Link></p>
             </div>
             <div className='mx-5 border-t py-3 flex justify-between items-center'>
                 <div className='flex gap-2 items-center'>

@@ -15,6 +15,11 @@ export const fetchCategoryNews = async ({params})=>{
     const data = await res.json();
     return data;
 }
+export const fetchSingleNews = async ({params})=>{
+    const res = await fetch(`http://localhost:5000/news/${params.id}`);
+    const data = await res.json();
+    return data;
+}
 export const homePageDataLoader = async ()=>{
     return Promise.all([fetchNews()]);
 }
