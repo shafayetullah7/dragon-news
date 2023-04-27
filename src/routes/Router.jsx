@@ -4,6 +4,8 @@ import Home from "../home/Home";
 import { fetchCategories, fetchCategoryNews, fetchNews, fetchSingleNews, homePageDataLoader } from "../utilities/fetcher";
 import Newses from "../home/Newses";
 import FullNews from "../FullNews";
+import Login from "../entry/Login";
+import Register from "../entry/Register";
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +32,15 @@ export const router = createBrowserRouter([
                 path:'/news/:id',
                 element:<FullNews></FullNews>,
                 loader:fetchSingleNews
-            }
+            },
         ]
-    }
+    },
+    {
+        path:'/login',
+        element:<Login></Login>
+    },
+    {
+        path:'/Register',
+        element:<Register></Register>
+    },
 ])
