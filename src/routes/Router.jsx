@@ -6,6 +6,7 @@ import Newses from "../home/Newses";
 import FullNews from "../FullNews";
 import Login from "../entry/Login";
 import Register from "../entry/Register";
+import PrivateRoute from "../privateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/news/:id',
-                element:<FullNews></FullNews>,
+                element:<PrivateRoute><FullNews></FullNews></PrivateRoute>,
                 loader:fetchSingleNews
             },
         ]

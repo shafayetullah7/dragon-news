@@ -4,14 +4,21 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// console.log('env : ',import.meta.env.VITE_PASS);
 const firebaseConfig = {
-  apiKey: "AIzaSyDD5-jkBbopHl470n3vWO7pSqFDPu32hRs",
-  authDomain: "practice-2-93b86.firebaseapp.com",
-  projectId: "practice-2-93b86",
-  storageBucket: "practice-2-93b86.appspot.com",
-  messagingSenderId: "370992960175",
-  appId: "1:370992960175:web:d93f38d52b59b41a5d3a5a"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID
 };
-
+// VITE_PASS=SECRET
+// VITE_APIKEY=AIzaSyDD5-jkBbopHl470n3vWO7pSqFDPu32hRs
+// VITE_AUTHDOMAIN=practice-2-93b86.firebaseapp.com
+// VITE_PROJECTID=practice-2-93b86
+// VITE_STORAGEBUCKET=practice-2-93b86.appspot.com
+// VITE_MESSAGINGSENDERID=370992960175
+// VITE_APPID=1:370992960175:web:d93f38d52b59b41a5d3a5a
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);

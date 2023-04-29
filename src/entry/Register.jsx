@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Nav from '../shared/header/Nav';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Register = () => {
     const [error,setError] = useState('');
+    const {createUser,setUser} = useContext(AuthContext);
+    const location = useLocation();
+    const from = location?.state?.from?.pathname;
+    console.log('reg location: ',location);
+    console.log('reg from: ',from);
+    const navigate = useNavigate();
+
+    
     const handleSubmit = e =>{
         e.preventDefault();
         setError('');
@@ -19,7 +28,16 @@ const Register = () => {
         }
         else{
             console.log(email,password);
-            form.reset();
+            createUser(email,password)
+            .then(result => {
+                console.log(result.user)
+                form.reset();
+                navigate(from||'/',{replace:true});
+                // alert('Successfully registered. Please Login!');
+            })
+            .catch(err=>{
+                setError(`Error: ${err.message}`);
+            })
         }
     }
     return (

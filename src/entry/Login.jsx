@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Nav from '../shared/header/Nav';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Login = () => {
     const [error,setError] = useState('');
+    const navigate = useNavigate();
+    const {user,setUser,loginUser} = useContext(AuthContext);
+    const location = useLocation();
+    const from = location?.state?.from?.pathname;
+    console.log('login:',location);
     const handleSubmit = e =>{
         e.preventDefault();
         setError('');
@@ -18,7 +24,17 @@ const Login = () => {
         }
         else{
             console.log(email,password);
-            form.reset();
+            loginUser(email,password)
+            .then(result =>{
+                setUser(result.user);
+                form.reset();
+                navigate(from || '/',{replace:true});
+                alert('logged in');
+            })
+            .catch(err =>{
+                setError(err.message);
+            })
+            
         }
     }
     return (
@@ -42,7 +58,7 @@ const Login = () => {
                     <input type='submit' className="btn w-full block mt-10" value='Login'/>
                 </form>
                 <p className='text-xs text-red-500 my-5'>{error}</p>
-                <p className='mt-10 text-center'>Do not have an account? <Link to={'/register'} className="link link-primary">Register</Link></p>
+                <p className='mt-10 text-center'>Do not have an account? <Link to={'/register'} state={{from:location?.state?.from}} className="link link-primary">Register</Link></p>
             </div>
         </div>
     );
